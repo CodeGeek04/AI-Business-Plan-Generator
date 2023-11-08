@@ -13,6 +13,7 @@ def get_completion(prompt, model="gpt-3.5-turbo-16k"):
             temperature=0.4,
         )
     except Exception as e:
+        print("ERROR: ", e)
         return "ERROR"
 
     return response.choices[0].message["content"]
@@ -27,7 +28,7 @@ class AI:
     def __init__(self, temperature=0.7):
         self.model = "gpt-3.5-turbo"
         self.temperature = temperature
-        openai.api_key = os.getenv("OPENAI_API_KEY")
+        openai.api_key = os.environ.get("NEXT_PUBLIC_OPENAI_API_KEY")
 
     def generate_business_plan(self, prompt):
         # Generate a business plan based on the prompt
@@ -35,6 +36,13 @@ class AI:
         plan_author = "AI"
         ai_prompt = f"Generate a business plan for a {prompt} startup. Be very concise and quick and dont include any unnecessary information."
         ai_content = get_completion(ai_prompt)
+
+        if ai_content == "ERROR":
+            plan = Plan()
+            plan.title = plan_title
+            plan.content = "We are receiving unusually high traffic. Please try again in a few minutes."
+            plan.author = plan_author
+            return plan
 
         plan = Plan()
         plan.title = plan_title
