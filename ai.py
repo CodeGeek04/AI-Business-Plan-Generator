@@ -27,7 +27,7 @@ class AI:
     def __init__(self, temperature=0.7):
         self.model = "gpt-3.5-turbo"
         self.temperature = temperature
-        openai.api_key = "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"
+        openai.api_key = "YOUR_API_KEY"
 
     def generate_business_plan(self, prompt):
         # Generate a business plan based on the prompt
