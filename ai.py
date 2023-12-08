@@ -1,5 +1,4 @@
 import openai
-import os
 
 def get_completion(prompt, model="gpt-3.5-turbo-16k"):
 
@@ -28,7 +27,7 @@ class AI:
     def __init__(self, temperature=0.7):
         self.model = "gpt-3.5-turbo"
         self.temperature = temperature
-        openai.api_key = os.environ.get("NEXT_PUBLIC_OPENAI_API_KEY")
+        openai.api_key = "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"
 
     def generate_business_plan(self, prompt):
         # Generate a business plan based on the prompt
